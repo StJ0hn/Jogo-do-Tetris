@@ -63,13 +63,30 @@ void cadastro(){
     //Pergunta o peso da peça:
     printf("Qual o peso da peso:[Kg]\n");
     scanf("%f", &nova ->peso);
+    printf("Peça cadastrada com sucesso!\n");
 
     tam++;
 }
 
 
 void listar_pecas(){
+    peca *aux = head;
+    if (head == NULL){
+    printf("Nenhuma peça foi cadastrada. Tente cadastrar alguma :)\n");
+    }
+    
+    else{
+        while (aux != NULL){
+            printf("\033[1;35m_______________________\033[0m\n");
+            printf("Cor: %s\n", aux->cor);
+            printf("Tipo: %d\n", aux->tipo);
+            printf("Peso: %.2f\n", aux->peso);
+            printf("Tamanho: %.2f\n", aux->tamanho);
+            printf("Borda? %s\n", aux->borda);
 
+            aux = aux->prox;
+        }   
+    }
 }
 
 
@@ -82,8 +99,8 @@ void reorganizar_pecas(){
 int main(){
     //Representação do menu de usuário:
     int opcao;
+    
     do{
-
     printf("\033[1;31mMenu:\033[0m\n");
     printf("\033[1;35m_______________________\033[0m\n");
     printf("\033[1;31m1 - Cadastrar peça\033[0m\n");
@@ -99,10 +116,24 @@ int main(){
     printf("Opção: ");
     scanf("%d", &opcao);
 
+        switch (opcao){
+        case 1:
+            cadastro();
+            break;
+        case 2:
+            listar_pecas();
+            break;
+        case 3:
+            reorganizar_pecas();
+            break;
+        case 0:
+            printf("Programa encerrado com sucesso\n");
+            break;
+        default:
+        printf("Opção não encontrada, tente novamente.\n");
+            break;
+        }
     } while (opcao != 0);
     
-    
-    cadastro();
-
     return 0;
 }
