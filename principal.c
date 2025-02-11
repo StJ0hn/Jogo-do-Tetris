@@ -12,15 +12,29 @@ typedef struct peca{
 }peca;
 
 int tam = 0;
+peca *head = NULL;
 
 //Criação da função de cadastrar peças:
 void cadastro(){
-    //Definição do tipo da peça:
     peca *nova = (peca *)malloc(sizeof(peca));
+    nova->prox = NULL;
     if (nova == NULL){
         printf("Erro na alocação de memória!\n");
         exit(1);
     }
+    //Definição do tipo da peça:
+    if(head == NULL){
+        head = nova;
+    }
+    else{
+        peca *aux = head;
+        while (aux->prox != NULL){
+            aux = aux->prox;
+        }
+        aux->prox = nova;
+        
+    }
+
     
     
     char escolha_char[20];
