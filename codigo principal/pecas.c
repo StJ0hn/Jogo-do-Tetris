@@ -75,7 +75,6 @@ void listar_pecas() {
     }
 }
 
-// Função para reorganizar peças (Ordenação Merge Sort)
 peca *dividir_lista(peca *head) {
     if (!head || !head->prox) return head;
 
@@ -97,7 +96,8 @@ peca *mesclar_listas(peca *esq, peca *dir) {
 
     peca *resultado = NULL;
     
-    if (esq->tamanho <= dir->tamanho) {
+    // Modificação para ordenar por tipo
+    if (esq->tipo <= dir->tipo) {
         resultado = esq;
         resultado->prox = mesclar_listas(esq->prox, dir);
     } else {
@@ -125,5 +125,5 @@ void reorganizar_pecas() {
     }
     
     head = merge_sort(head);
-    printf("Peças reorganizadas por tamanho!\n");
+    printf("Peças reorganizadas por tipo!\n");
 }
