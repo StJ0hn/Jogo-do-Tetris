@@ -167,6 +167,11 @@ int main(){
             while (getchar() != '\n');  
             continue;  
         }
+        if (opcao != 0 && opcao != 1 && opcao != 2 && opcao != 3){
+            printf("Opção inválida, Tente novamente com um número válido.\n");
+            continue;
+        }
+        
 
         switch (opcao) {
             case 1: 
