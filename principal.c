@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 
 typedef struct peca {
@@ -142,13 +143,20 @@ void reorganizar_pecas() {
 }
 
 
+int validacao_de_entrada_inteira(char *input){
+    for (int i = 0; input[i] != '\0'; i++) {
+        if (!isdigit(input[i])){
+            return 0; 
+        }
+    }
+    return 1;  
+}
 
-#include <stdio.h>
-#include <stdlib.h>
 
 int main(){
+    char input[10];
     // Representação do menu de usuário:
-    int opcao;
+    int opcao = -2;
     
     do {
         printf("\033[1;31mMenu:\033[0m\n");
@@ -161,17 +169,15 @@ int main(){
         printf("\033[1;35m_______________________\033[0m\n");
         printf("\033[1;31m0 - Sair\033[0m\n");
         printf("Opção: ");
+
+        fgets(input, sizeof(input), stdin);
+        input[strcspn(input, "\n")] = 0;  // Remover o caractere de nova linha
         
-        if (scanf("%d", &opcao) != 1) { //Tratando erro para caso o usuário insira uma string.
-            printf("Entrada inválida, insira um número válido.\n");
-            while (getchar() != '\n');  
+        if (!validacao_de_entrada_inteira(input)) {
+            printf("Entrada inválida, insira um número inteiro válido.\n");
             continue;  
         }
-        if (opcao != 0 && opcao != 1 && opcao != 2 && opcao != 3){
-            printf("Opção inválida, Tente novamente com um número válido.\n");
-            continue;
-        }
-        
+         opcao = atoi(input);
 
         switch (opcao) {
             case 1: 
